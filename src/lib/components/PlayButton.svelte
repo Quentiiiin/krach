@@ -23,9 +23,7 @@
             track &&
             audioPlayer.currentTrack?.permalink_url !== track.permalink_url
         ) {
-            audioPlayer.currentTime = 0;
-            audioPlayer.currentTrack = track;
-            audioPlayer.paused = false;
+            audioPlayer.play(track);
         } else if (audioPlayer.currentTrack) {
             audioPlayer.paused = !audioPlayer.paused;
         }

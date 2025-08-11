@@ -1,3 +1,4 @@
+import { updateMediaSessionMetadata } from "$lib/util";
 import type { SoundcloudTrack } from "soundcloud.ts";
 
 export class AudioPlayer {
@@ -8,6 +9,15 @@ export class AudioPlayer {
     audioElement?: HTMLAudioElement = $state();
     volume = $state(0.2);
     loop = $state(false);
+
+    constructor() {
+        if ("mediaSession" in navigator) {
+            navigator.mediaSession.setActionHandler("nexttrack", () => {
+                console.log("next")
+                this.nextTrack();
+            });
+        }
+    }
 
     reset() {
         this.currentTrack = undefined;
@@ -20,7 +30,6 @@ export class AudioPlayer {
         this.nextPlaybackTracks = [...this.nextPlaybackTracks, track];
     }
     handleEnded() {
-        console.log(this.loop)
         if (this.loop) {
             this.currentTime = 0;
             this.paused = false;
@@ -33,14 +42,18 @@ export class AudioPlayer {
             audioPlayer.nextPlaybackTracks.length > 0
         ) {
             const [firstElement, ...restOfTheArray] =
-                audioPlayer.nextPlaybackTracks;
-            audioPlayer.currentTime = 0;
-            audioPlayer.currentTrack = firstElement;
-            audioPlayer.paused = false;
+                this.nextPlaybackTracks;
+            this.play(firstElement);
             audioPlayer.nextPlaybackTracks = restOfTheArray;
         } else {
             this.paused = true;
         }
+    }
+    play(track: SoundcloudTrack) {
+        this.currentTime = 0;
+        this.currentTrack = track;
+        this.paused = false;
+        updateMediaSessionMetadata(track.title, track.user.username, track.artwork_url);
     }
 }
 

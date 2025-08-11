@@ -7,3 +7,24 @@ export function formatSecondsToMMSS(totalSeconds: number): string {
 
     return `${formattedMinutes}:${formattedSeconds}`;
 }
+
+export function updateMediaSessionMetadata(
+    newTitle: string,
+    newArtist: string,
+    newArtworkUrl: string,
+) {
+    if ("mediaSession" in navigator) {
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: newTitle,
+            artist: newArtist,
+            album: "Web Dev Jams", // Keep or update album
+            artwork: [
+                {
+                    src: newArtworkUrl,
+                    sizes: "512x512", // Specify a general size or provide multiple
+                    type: "image/png", // Or 'image/jpeg' etc.
+                },
+            ],
+        });
+    }
+}

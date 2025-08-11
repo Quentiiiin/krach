@@ -9,9 +9,7 @@
 <div class=" flex hover:brightness-110 bg-purple-300 rounded-md p-1 w-dvh">
     <button
         onclick={() => {
-            audioPlayer.currentTime = 0;
-            audioPlayer.currentTrack = track;
-            audioPlayer.paused = false;
+            audioPlayer.play(track);
         }}
     >
         <Thumbnail classNames=" h-16 w-16" src={track.artwork_url} />
