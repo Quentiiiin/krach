@@ -4,6 +4,7 @@
     "": {
       "name": "krach",
       "dependencies": {
+        "@svelte-put/intersect": "^4.0.0",
         "ffmpeg-static": "^5.2.0",
         "soundcloud-scraper": "^5.0.3",
         "soundcloud.ts": "^0.6.5",
@@ -133,6 +134,8 @@
     "@rollup/rollup-win32-x64-msvc": ["@rollup/rollup-win32-x64-msvc@4.46.2", "", { "os": "win32", "cpu": "x64" }, "sha512-CvUo2ixeIQGtF6WvuB87XWqPQkoFAFqW+HUo/WzHwuHDvIwZCtjdWXoYCcr06iKGydiqTclC4jU/TNObC/xKZg=="],
 
     "@standard-schema/spec": ["@standard-schema/spec@1.0.0", "", {}, "sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA=="],
+
+    "@svelte-put/intersect": ["@svelte-put/intersect@4.0.0", "", { "peerDependencies": { "svelte": "^5.1.0" } }, "sha512-NTDqkUSKUlmK4NL1/ecWPRi3GGcv6QOCMyf8ym9dH3KStVOHXD7gozKnCgZgklR+V6G4KdT3ej3GO6YnSZs4og=="],
 
     "@sveltejs/acorn-typescript": ["@sveltejs/acorn-typescript@1.0.5", "", { "peerDependencies": { "acorn": "^8.9.0" } }, "sha512-IwQk4yfwLdibDlrXVE04jTZYlLnwsTT2PIOQQGNLWfjavGifnk1JD1LcZjZaBTRcxZu2FfPfNLOE04DSu9lqtQ=="],
 
