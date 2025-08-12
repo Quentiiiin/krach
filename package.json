@@ -26,7 +26,6 @@
 	"dependencies": {
 		"@svelte-put/intersect": "^4.0.0",
 		"ffmpeg-static": "^5.2.0",
-		"soundcloud-scraper": "^5.0.3",
 		"soundcloud.ts": "^0.6.5",
 		"zod": "^4.0.17"
 	}

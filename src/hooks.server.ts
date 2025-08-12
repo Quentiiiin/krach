@@ -1,10 +1,10 @@
 import type { Handle } from '@sveltejs/kit';
-import scScraper from 'soundcloud-scraper';
+import Soundcloud from 'soundcloud.ts';
 
 export const handle: Handle = async ({ event, resolve }) => {
     let scKey = event.cookies.get("scKey");
     if (!scKey) {
-        const newKey = await scScraper.Util.keygen();
+        const newKey = await new Soundcloud().api.getClientId();
         event.cookies.set("scKey", newKey, { path: '/' });
         scKey = newKey;
     }
