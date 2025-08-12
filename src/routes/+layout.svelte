@@ -26,7 +26,7 @@
 		}}
 	>
 		<input
-			class=" outline-0 m-1"
+			class=" outline-0 m-1 w-screen"
 			name="q"
 			bind:value={searchValue}
 			type="text"
