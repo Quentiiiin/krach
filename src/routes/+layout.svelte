@@ -18,7 +18,7 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class=" flex top-0 bg-amber-200 w-screen h-10 items-center fixed z-10">
+<div class=" flex top-0 bg-amber-200 w-full h-10 items-center fixed z-10">
 	<a href="/queue"> q </a>
 	<form
 		onsubmit={(event) => {
