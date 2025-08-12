@@ -1,5 +1,5 @@
 import type { Handle } from '@sveltejs/kit';
-import Soundcloud from 'soundcloud.ts';
+import { Soundcloud } from 'soundcloud.ts';
 
 export const handle: Handle = async ({ event, resolve }) => {
     let scKey = event.cookies.get("scKey");

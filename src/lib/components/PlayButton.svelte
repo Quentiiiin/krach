@@ -1,5 +1,6 @@
 <script lang="ts">
     import { audioPlayer } from "$lib/state/player.svelte";
+    import { PauseIcon, PlayIcon } from "lucide-svelte";
     import type { SoundcloudTrack } from "soundcloud.ts";
 
     const { track }: { track?: SoundcloudTrack } = $props();
@@ -17,7 +18,7 @@
 </script>
 
 <button
-    class=" bg-orange-600 text-2xl"
+    class=" bg-purple-300 nb-button w-10 h-10 flex items-center justify-center cursor-pointer"
     onclick={() => {
         if (
             track &&
@@ -30,8 +31,8 @@
     }}
 >
     {#if icon === "play"}
-        play
+        <PlayIcon size="30" />
     {:else}
-        pause
+        <PauseIcon size="30" />
     {/if}
 </button>
