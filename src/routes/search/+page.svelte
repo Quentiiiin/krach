@@ -1,5 +1,4 @@
 <script lang="ts">
-    import PlayButton from "$lib/components/PlayButton.svelte";
     import TrackEntry from "$lib/components/TrackEntry.svelte";
     import { getSearchResults } from "$lib/remote/sc.remote.js";
     import { intersect, type IntersectDetail } from "@svelte-put/intersect";
@@ -10,10 +9,14 @@
     let newResults: SoundcloudTrack[] = $state([]);
 
     const allResults = $derived.by(() => {
+        //check is required because else it errors on navigation
+        if (!data.results) return [...newResults];
+
         const firstResults = data.results.current;
         if (firstResults) {
             return [...data.results.current, ...newResults];
-        } else return [...newResults];
+        }
+        return [...newResults];
     });
 
     async function onIntersect(event: CustomEvent<IntersectDetail>) {
