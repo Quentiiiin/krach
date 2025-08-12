@@ -8,6 +8,10 @@
 
     let newResults: SoundcloudTrack[] = $state([]);
 
+    let lastOffsetFetched = $state(0);
+
+    let showWireFrame = $state(true);
+
     const allResults = $derived.by(() => {
         //check is required because else it errors on navigation
         if (!data.results) return [...newResults];
@@ -20,33 +24,42 @@
     });
 
     async function onIntersect(event: CustomEvent<IntersectDetail>) {
-        const { observer, entries, direction } = event.detail;
-        if (direction === "down") {
-            const results = await getSearchResults({
-                term: data.term,
-                offset: allResults.length,
-            });
-            newResults = [...newResults, ...results];
+        if (lastOffsetFetched < allResults.length) {
+            lastOffsetFetched = allResults.length;
+        } else {
+            return;
         }
+        const results = await getSearchResults({
+            term: data.term,
+            offset: allResults.length,
+        });
+        if (results.length === 0) {
+            showWireFrame = false;
+        }
+        newResults = [...newResults, ...results];
     }
 </script>
 
 {#await data.results}
-    loading...
+    {#each { length: 10 } as index}
+        <li class=" m-2">
+            <TrackEntry />
+        </li>
+    {/each}
 {:then}
-    <ul>
+    <ul class="">
         {#each allResults as result, index}
             <li class="m-2">
                 <TrackEntry track={result} />
-                {#if index % 5 === 0 && index > 1}
-                    <div
-                        class=" border border-amber-400"
-                        use:intersect
-                        onintersectonce={onIntersect}
-                    ></div>
-                {/if}
             </li>
         {/each}
+        {#if showWireFrame}
+            {#each { length: 10 } as index}
+                <li class=" m-2">
+                    <TrackEntry />
+                </li>
+                <div use:intersect onintersect={onIntersect}></div>
+            {/each}
+        {/if}
     </ul>
-    <div use:intersect onintersect={onIntersect}>loading...</div>
 {/await}

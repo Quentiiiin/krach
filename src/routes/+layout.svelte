@@ -16,7 +16,9 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class=" flex top-0 bg-amber-200 w-full h-10 items-center fixed z-10">
+<div
+	class=" flex top-0 bg-purple-400 w-full items-center fixed z-10 border-b-2 border-black md:text-3xl"
+>
 	<form
 		onsubmit={(event) => {
 			event.preventDefault();
@@ -24,15 +26,16 @@
 		}}
 	>
 		<input
+			class=" outline-0 m-1"
 			name="q"
 			bind:value={searchValue}
 			type="text"
-			placeholder="query"
+			placeholder="search a song"
 		/>
 	</form>
 </div>
 <AudioWrapper />
-<div class=" mt-12">
+<div class=" mt-14">
 	{@render children?.()}
 </div>
 <PlayerBar />

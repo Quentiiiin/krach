@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { Music } from "lucide-svelte";
+
     const { src, classNames }: { src?: string; classNames?: string } = $props();
 </script>
 
@@ -8,6 +10,6 @@
     {#if src}
         <img class="{classNames} rounded-md" {src} alt="" />
     {:else}
-        m
+        <Music />
     {/if}
 </div>
