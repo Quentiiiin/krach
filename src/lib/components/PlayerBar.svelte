@@ -18,12 +18,12 @@
 </script>
 
 <div
-    class="fixed z-10 bottom-4 left-1/2 -translate-x-1/2 bg-fuchsia-400 flex rounded-md border-2 border-black px-3 py-2 items-center space-x-4 scale-90 md:scale-100"
+    class="fixed z-10 bottom-0 left-0 w-screen bg-fuchsia-400 flex md:bottom-4 md:left-1/2 md:-translate-x-1/2 md:w-fit md:rounded-md md:border-2 border-t-2 border-black px-3 md:py-2 items-center space-x-4 scale-90 md:scale-100"
 >
     <PlayButton />
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center w-full">
         <span
-            class=" mb-1 whitespace-nowrap text-base overflow-hidden text-ellipsis max-w-56"
+            class="mb-1 whitespace-nowrap text-base overflow-hidden text-ellipsis max-w-56"
         >
             {audioPlayer.currentTrack?.title ?? "No track playing"}
         </span>
@@ -43,7 +43,7 @@
     </div>
 
     <Thumbnail
-        classNames="h-16 w-16 flex-shrink-0 rounded-md"
+        classNames="md:h-16 h-14 flex-shrink-0 rounded-md"
         src={audioPlayer.currentTrack?.artwork_url}
     />
 </div>

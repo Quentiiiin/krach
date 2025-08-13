@@ -40,6 +40,10 @@
     }
 </script>
 
+<svelte:head>
+    <title>{data.term} results - krach music player</title>
+</svelte:head>
+
 {#await data.results}
     {#each { length: 10 } as index}
         <li class=" m-2">

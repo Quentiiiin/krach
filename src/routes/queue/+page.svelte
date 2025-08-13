@@ -3,6 +3,10 @@
     import { audioPlayer } from "$lib/state/player.svelte";
 </script>
 
+<svelte:head>
+    <title>queue - krach music player</title>
+</svelte:head>
+
 <ul>
     {#if audioPlayer.currentTrack}
         <li class="m-2">
