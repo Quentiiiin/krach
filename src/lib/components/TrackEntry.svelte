@@ -2,7 +2,7 @@
     import type { SoundcloudTrack } from "soundcloud.ts";
     import Thumbnail from "./Thumbnail.svelte";
     import { audioPlayer } from "$lib/state/player.svelte";
-    import { ListPlus } from "lucide-svelte";
+    import { Check, ListPlus } from "lucide-svelte";
     import { mobileClick } from "$lib/actions/mobileClick";
 
     const { track }: { track?: SoundcloudTrack } = $props();
@@ -14,9 +14,17 @@
             track.permalink_url === audioPlayer.currentTrack?.permalink_url,
     );
 
+    let showNextSuccess = $state(false);
+
     function handleNextButton(event: Event) {
         event.stopPropagation();
-        if (track) audioPlayer.addToQueue(track);
+        if (track) {
+            audioPlayer.addToQueue(track);
+            showNextSuccess = true;
+            setTimeout(() => {
+                showNextSuccess = false;
+            }, 1.5 * 1000);
+        }
     }
 </script>
 
@@ -65,7 +73,11 @@
             onclick={handleNextButton}
             class="nb-button bg-pink-400 w-10 h-10 flex items-center justify-center"
         >
-            <ListPlus />
+            {#if showNextSuccess}
+                <Check />
+            {:else}
+                <ListPlus />
+            {/if}
         </button>
     </div>
 </a>

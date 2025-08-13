@@ -14,11 +14,10 @@ export const getSearchResults = query(z.object({
 });
 
 export const getTrackInfo = query(z.object({
-    user: z.string(),
-    track: z.string()
-}), async ({ user, track }) => {
+    permalink_url: z.string()
+}), async ({ permalink_url }) => {
     const client = getClient();
-    const res = await client.tracks.get(`https://soundcloud.com/${user}/${track}`)
+    const res = await client.tracks.get(`https://soundcloud.com${permalink_url}`)
     rewritePermalink(res);
     return res;
 });

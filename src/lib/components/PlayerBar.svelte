@@ -19,7 +19,7 @@
 
 <div class=" flex fixed z-10 bottom-0 left-0 justify-center w-screen">
     <div
-        class:mb-4={isPWA()}
+        class:pb-4={isPWA()}
         class=" md:mb-2 w-screen bg-fuchsia-400 flex md:w-fit md:rounded-md md:border-2 border-t-2 border-black px-3 md:py-2 items-center space-x-4"
     >
         <PlayButton />
@@ -47,6 +47,7 @@
         <Thumbnail
             classNames="md:h-16 h-14 flex-shrink-0 rounded-md"
             src={audioPlayer.currentTrack?.artwork_url}
+            full={true}
         />
     </div>
 </div>

@@ -19,7 +19,7 @@
 		audioPlayer.loadFromStorage();
 		setInterval(() => {
 			audioPlayer.saveToStorage();
-		}, 10);
+		}, 10 * 1000);
 	});
 </script>
 

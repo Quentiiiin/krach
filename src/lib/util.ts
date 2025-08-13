@@ -17,7 +17,6 @@ export function updateMediaSessionMetadata(
         navigator.mediaSession.metadata = new MediaMetadata({
             title: newTitle,
             artist: newArtist,
-            album: "Web Dev Jams", // Keep or update album
             artwork: [
                 {
                     src: newArtworkUrl,
@@ -31,7 +30,7 @@ export function updateMediaSessionMetadata(
 
 export function isPWA(): boolean {
     // For iOS Safari
-    const isIOSStandalone = window.navigator.standalone === true;
+    const isIOSStandalone = (window.navigator as any).standalone === true;
 
     // For most browsers (Chrome, Edge, etc.)
     const isDisplayStandalone =
@@ -40,4 +39,22 @@ export function isPWA(): boolean {
 
 
     return isIOSStandalone || isDisplayStandalone;
+}
+
+export function getArtworkSizes(url: string) {
+    const path = new URL(url).pathname;
+    const file = path.split('.')[0];
+    const fileSplitted = file.split('-');
+    fileSplitted.pop();
+    let newFilePrefix = '';
+    fileSplitted.forEach(p => newFilePrefix = newFilePrefix + p + '-');
+    const resultUrl = new URL(url);
+    resultUrl.pathname = newFilePrefix;
+    const s = resultUrl.toString();
+    const sizes = {
+        full: s + 't1080x1080.jpg',
+        medium: s + 't500x500.jpg',
+        small: s + 't50x50.jpg'
+    };
+    return sizes;
 }

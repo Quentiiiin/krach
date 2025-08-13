@@ -1,6 +1,5 @@
-import { updateMediaSessionMetadata } from "$lib/util";
+import { getArtworkSizes, updateMediaSessionMetadata } from "$lib/util";
 import type { SoundcloudTrack } from "soundcloud.ts";
-import { tick } from "svelte";
 
 export class AudioPlayer {
     currentTrack?: SoundcloudTrack = $state();
@@ -27,6 +26,8 @@ export class AudioPlayer {
             this.volume = parsed.volume;
             this.loop = parsed.loop;
             this.currentTime = parsed.currentTime;
+            if (this.currentTrack)
+                updateMediaSessionMetadata(this.currentTrack?.title, this.currentTrack?.user.username, this.currentTrack?.artwork_url);
         } catch (error) {
             console.error("saved playback data invalid, deleting");
             localStorage.removeItem('krach-player-data');
@@ -45,10 +46,10 @@ export class AudioPlayer {
 
     constructor() {
         if ("mediaSession" in navigator) {
-            navigator.mediaSession.setActionHandler("nexttrack", () => {
-                console.log("next")
-                this.nextTrack();
-            });
+            navigator.mediaSession.setActionHandler("nexttrack", this.nextTrack);
+            navigator.mediaSession.setActionHandler("previoustrack", this.reset);
+            navigator.mediaSession.setActionHandler("play", () => this.paused = false);
+            navigator.mediaSession.setActionHandler("pause", () => this.paused = true);
         }
     }
 
@@ -62,6 +63,9 @@ export class AudioPlayer {
     }
     addToQueue(track: SoundcloudTrack) {
         this.nextPlaybackTracks = [...this.nextPlaybackTracks, track];
+        if (!this.currentTrack) {
+            this.nextTrack();
+        }
         this.saveToStorage();
     }
     handleEnded() {
@@ -85,10 +89,12 @@ export class AudioPlayer {
             this.paused = true;
         }
     }
-    play(track: SoundcloudTrack) {
+    async play(track: SoundcloudTrack) {
         this.currentTime = 0;
+        track.artwork_url = getArtworkSizes(track.artwork_url).full;
         this.currentTrack = track;
         this.paused = false;
+        this.nextPlaybackTracks = this.nextPlaybackTracks.filter((v) => v.permalink_url !== track.permalink_url);
         updateMediaSessionMetadata(track.title, track.user.username, track.artwork_url);
         this.saveToStorage();
     }
