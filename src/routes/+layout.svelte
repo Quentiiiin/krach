@@ -7,10 +7,20 @@
 	import "@fontsource-variable/dm-sans";
 	import PlayerBar from "$lib/components/PlayerBar.svelte";
 	import { List } from "lucide-svelte";
+	import { onMount, tick } from "svelte";
+	import { audioPlayer } from "$lib/state/player.svelte";
 
 	let { children } = $props();
 
 	let searchValue = $state(new URL(page.url).searchParams.get("q") ?? "");
+
+	onMount(async () => {
+		await tick();
+		audioPlayer.loadFromStorage();
+		setInterval(() => {
+			audioPlayer.saveToStorage();
+		}, 10);
+	});
 </script>
 
 <svelte:head>
