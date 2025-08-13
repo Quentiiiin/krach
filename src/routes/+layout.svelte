@@ -6,6 +6,7 @@
 	import { page } from "$app/state";
 	import "@fontsource-variable/dm-sans";
 	import PlayerBar from "$lib/components/PlayerBar.svelte";
+	import { List } from "lucide-svelte";
 
 	let { children } = $props();
 
@@ -17,22 +18,27 @@
 </svelte:head>
 
 <div
-	class=" flex top-0 bg-purple-400 w-full items-center fixed z-10 border-b-2 border-black md:text-3xl"
+	class=" flex justify-between top-0 bg-purple-400 w-full items-center fixed z-10 border-b-2 border-black md:text-3xl"
 >
 	<form
+		class=" flex-1"
 		onsubmit={(event) => {
 			event.preventDefault();
 			goto("/search?q=" + searchValue);
 		}}
 	>
 		<input
-			class=" outline-0 m-1 w-screen"
+			class=" outline-0 m-1 w-full"
 			name="q"
 			bind:value={searchValue}
 			type="text"
 			placeholder="search a song"
 		/>
 	</form>
+	<div class=" flex">
+		<a class=" flex items-center" href="/queue"> <List /> </a>
+		<div class=" mx-2 font-black">krach</div>
+	</div>
 </div>
 <AudioWrapper />
 <div class=" mt-14">

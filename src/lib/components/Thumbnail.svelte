@@ -5,10 +5,10 @@
 </script>
 
 <div
-    class=" rounded-md {classNames} bg-red-300 flex items-center justify-center"
+    class=" rounded-md {classNames} bg-red-300 flex items-center justify-center aspect-square"
 >
     {#if src}
-        <img class="{classNames} rounded-md" {src} alt="" />
+        <img class=" rounded-md aspect-square" {src} alt="" />
     {:else}
         <Music />
     {/if}
