@@ -16,3 +16,37 @@ body {
 .nb-button:hover, .nb-button:active {
     @apply shadow-[1px_1px_0px_0px_rgba(0,0,0)] translate-x-[2px] translate-y-[2px]
 }
+
+
+.range-slider {
+   -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    @apply border-2 border-black rounded-2xl bg-white;
+}
+
+    .range-slider::-moz-range-thumb,
+    .range-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        @apply h-3.5 w-3.5 rounded-full shadow-md border-2 border-black;
+    }
+
+    .range-slider::-webkit-slider-runnable-track {
+        @apply h-2 rounded-lg;
+    }
+
+    .range-slider::-moz-range-track {
+        @apply h-2 rounded-lg;
+    }
+
+    .range-slider::-ms-track {
+        @apply h-2 rounded-lg;
+        border-color: transparent;
+        color: transparent;
+    }
+
+    .range-slider::-ms-fill-lower,
+    .range-slider::-ms-fill-upper {
+        background: transparent;
+    }
