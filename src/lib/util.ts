@@ -28,3 +28,16 @@ export function updateMediaSessionMetadata(
         });
     }
 }
+
+export function isPWA(): boolean {
+    // For iOS Safari
+    const isIOSStandalone = window.navigator.standalone === true;
+
+    // For most browsers (Chrome, Edge, etc.)
+    const isDisplayStandalone =
+        window.matchMedia('(display-mode: standalone)').matches;
+
+
+
+    return isIOSStandalone || isDisplayStandalone;
+}

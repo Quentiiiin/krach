@@ -43,7 +43,7 @@
                 {:else}
                     <span
                         style="width: {randomWidth()};"
-                        class="h-6 bg-purple-200 flex animate-pulse rounded-md"
+                        class="md:h-6 h-4 bg-purple-200 flex animate-pulse rounded-md"
                     ></span>
                 {/if}
             </div>
@@ -53,7 +53,7 @@
                 {:else}
                     <span
                         style="width: {randomWidth()};"
-                        class="h-6 mt-1 bg-purple-100 flex animate-pulse rounded-md"
+                        class="md:h-6 h-4 mt-1 bg-purple-100 flex animate-pulse rounded-md"
                     ></span>
                 {/if}
             </div>
