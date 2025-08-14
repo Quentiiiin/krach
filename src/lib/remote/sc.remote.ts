@@ -57,6 +57,45 @@ export const getUser = query(z.object({
     return res;
 });
 
+export const getRelated = query(z.object({
+    track: z.string(),
+}), async ({ track }) => {
+    const client = getClient();
+    let res = await client.tracks.related(track);
+    res.forEach(r => rewritePermalink(r));
+    return res;
+});
+
+export const getAllRelated = query(
+    z.object({
+        userResolvable: z.string(),
+    }),
+    async ({ userResolvable }) => {
+        const client = getClient();
+
+        // Get all liked tracks
+        const likes = await client.users.likes(userResolvable);
+
+        // Use a Map keyed by track ID to ensure uniqueness
+        const relatedMap = new Map<number, SoundcloudTrack>();
+
+        // Fetch related tracks for each liked track in parallel
+        await Promise.all(
+            likes.map(async (t) => {
+                if (!t) return;
+                const res = await client.tracks.related(t.id);
+                res.forEach((r) => {
+                    if (r && !relatedMap.has(r.id)) {
+                        relatedMap.set(r.id, r);
+                    }
+                });
+            })
+        );
+        const all = Array.from(relatedMap.values());
+        all.forEach(a => rewritePermalink(a));
+        return all;
+    }
+);
 function rewritePermalink(track: SoundcloudTrack) {
     const url = new URL(track.permalink_url);
     track.permalink_url = url.pathname;

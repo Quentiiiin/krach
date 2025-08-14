@@ -20,11 +20,14 @@
 >
     {#if src}
         <img
+            loading="lazy"
             src={full ? sizes.full : sizes.medium}
             class=" aspect-square rounded-md"
             alt=""
         />
     {:else}
-        <Music />
+        <span class=" aspect-square rounded-md">
+            <Music />
+        </span>
     {/if}
 </div>
