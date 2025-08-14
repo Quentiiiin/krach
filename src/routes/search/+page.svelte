@@ -49,7 +49,6 @@
         <li class=" m-2">
             <TrackEntry />
         </li>
-        <div></div>
     {/each}
 {:then}
     <ul class="">

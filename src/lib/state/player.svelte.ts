@@ -91,7 +91,6 @@ export class AudioPlayer {
     }
     async play(track: SoundcloudTrack) {
         this.currentTime = 0;
-        track.artwork_url = getArtworkSizes(track.artwork_url).full;
         this.currentTrack = track;
         this.paused = false;
         this.nextPlaybackTracks = this.nextPlaybackTracks.filter((v) => v.permalink_url !== track.permalink_url);

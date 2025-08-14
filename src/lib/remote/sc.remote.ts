@@ -1,4 +1,4 @@
-import { query } from "$app/server";
+import { command, getRequestEvent, query } from "$app/server";
 import z from "zod";
 import { getClient } from "$lib/server/sc-util";
 import type { SoundcloudTrack } from "soundcloud.ts";
@@ -19,6 +19,41 @@ export const getTrackInfo = query(z.object({
     const client = getClient();
     const res = await client.tracks.get(`https://soundcloud.com${permalink_url}`)
     rewritePermalink(res);
+    return res;
+});
+
+export const authenticate = command(z.object({
+    oAuth: z.string()
+}), async ({ oAuth }) => {
+    const client = getClient();
+    client.api.oauthToken = oAuth;
+    const res = await client.me.get();
+    if (res.id) {
+        getRequestEvent().cookies.set('scOAuth', oAuth, { path: '/', maxAge: 60 * 60 * 24 * 7 });
+        return true;
+    } return false;
+});
+
+export const me = query(async () => {
+    const client = getClient(true);
+    return await client.me.get();
+});
+
+export const getLikes = query(z.object({
+    userResolvable: z.string(),
+}), async ({ userResolvable }) => {
+    const client = getClient();
+    let res = await client.users.likes(userResolvable);
+    res = res.filter(v => v != null);
+    res.forEach(r => rewritePermalink(r));
+    return res;
+});
+
+export const getUser = query(z.object({
+    userResolvable: z.string(),
+}), async ({ userResolvable }) => {
+    const client = getClient();
+    let res = await client.users.get(userResolvable);
     return res;
 });
 

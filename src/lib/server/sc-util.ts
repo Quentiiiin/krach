@@ -1,10 +1,11 @@
 import { getRequestEvent } from "$app/server";
 import { Soundcloud } from "soundcloud.ts";
 
-export function getClient() {
+export function getClient(authenticated: boolean = false) {
     const event = getRequestEvent();
     const scKey = event.locals.scKey;
-    return new Soundcloud(scKey);
+    const oAuth = authenticated ? event.locals.oAuth : undefined;
+    return new Soundcloud(scKey, oAuth);
 }
 
 export async function getAudio(user: string, track: string) {
@@ -12,8 +13,6 @@ export async function getAudio(user: string, track: string) {
     const stream = await client.util.streamTrack(`https://soundcloud.com/${user}/${track}`);
     return stream;
 }
-
-
 
 export async function streamToArrayBuffer(
     stream: NodeJS.ReadableStream

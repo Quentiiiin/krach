@@ -2,8 +2,9 @@
     import type { SoundcloudTrack } from "soundcloud.ts";
     import Thumbnail from "./Thumbnail.svelte";
     import { audioPlayer } from "$lib/state/player.svelte";
-    import { Check, ListPlus } from "lucide-svelte";
+    import { Check, Heart, ListPlus } from "lucide-svelte";
     import { mobileClick } from "$lib/actions/mobileClick";
+    import { page } from "$app/state";
 
     const { track }: { track?: SoundcloudTrack } = $props();
 
@@ -45,7 +46,7 @@
             src={track?.artwork_url}
         />
         <div class="pl-2 flex flex-col min-w-0">
-            <div class="font-bold truncate w-full">
+            <div class="font-bold truncate w-full flex items-center">
                 {#if track}
                     {track.title}
                 {:else}
@@ -68,6 +69,11 @@
         </div>
     </div>
     <div class="mr-2 flex items-center pb-2 flex-shrink-0">
+        {#if track && page.data.meLikes?.find((v) => v.id === track.id) != null}
+            <span class=" text-black mr-4">
+                <Heart fill={"oklch(80.8% 0.114 19.571)"} />
+            </span>
+        {/if}
         <button
             use:mobileClick={handleNextButton}
             onclick={handleNextButton}

@@ -14,13 +14,14 @@ export function updateMediaSessionMetadata(
     newArtworkUrl: string,
 ) {
     if ("mediaSession" in navigator) {
+        const fullArtwork = getArtworkSizes(newArtworkUrl).full;
         navigator.mediaSession.metadata = new MediaMetadata({
             title: newTitle,
             artist: newArtist,
             artwork: [
                 {
-                    src: newArtworkUrl,
-                    sizes: "512x512", // Specify a general size or provide multiple
+                    src: fullArtwork,
+                    sizes: "1080x1080", // Specify a general size or provide multiple
                     type: "image/png", // Or 'image/jpeg' etc.
                 },
             ],
