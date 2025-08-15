@@ -1,7 +1,7 @@
 <script lang="ts">
     import TrackCard from "$lib/components/TrackCard.svelte";
     import { getAllRelated, getRelated } from "$lib/remote/sc.remote.js";
-    import type { SoundcloudTrack } from "soundcloud.ts";
+    import type { SoundcloudTrack } from "soundcloud.ts-light";
     import { onMount } from "svelte";
 
     const { data } = $props();

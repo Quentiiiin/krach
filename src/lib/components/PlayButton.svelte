@@ -1,7 +1,7 @@
 <script lang="ts">
     import { audioPlayer } from "$lib/state/player.svelte";
     import { PauseIcon, PlayIcon } from "lucide-svelte";
-    import type { SoundcloudTrack } from "soundcloud.ts";
+    import type { SoundcloudTrack } from "soundcloud.ts-light";
 
     const { track }: { track?: SoundcloudTrack } = $props();
 

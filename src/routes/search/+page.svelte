@@ -2,7 +2,7 @@
     import TrackEntry from "$lib/components/TrackEntry.svelte";
     import { getSearchResults } from "$lib/remote/sc.remote.js";
     import { intersect, type IntersectDetail } from "@svelte-put/intersect";
-    import type { SoundcloudTrack } from "soundcloud.ts";
+    import type { SoundcloudTrack } from "soundcloud.ts-light";
 
     const { data } = $props();
 

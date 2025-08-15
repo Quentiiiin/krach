@@ -26,9 +26,8 @@
 	"dependencies": {
 		"@fontsource-variable/dm-sans": "^5.2.6",
 		"@svelte-put/intersect": "^4.0.0",
-		"ffmpeg-static": "^5.2.0",
 		"lucide-svelte": "^0.539.0",
-		"soundcloud.ts": "^0.6.5",
+		"soundcloud.ts-light": "^0.6.5",
 		"zod": "^4.0.17"
 	}
 }

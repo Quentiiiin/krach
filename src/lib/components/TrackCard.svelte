@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { SoundcloudTrack } from "soundcloud.ts";
+    import type { SoundcloudTrack } from "soundcloud.ts-light";
     import Thumbnail from "./Thumbnail.svelte";
     import { audioPlayer } from "$lib/state/player.svelte";
     import { Check, Heart, ListPlus } from "lucide-svelte";

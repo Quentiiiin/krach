@@ -1,7 +1,7 @@
 import { command, getRequestEvent, query } from "$app/server";
 import z from "zod";
 import { getClient } from "$lib/server/sc-util";
-import type { SoundcloudTrack } from "soundcloud.ts";
+import type { SoundcloudTrack } from "soundcloud.ts-light";
 
 export const getSearchResults = query(z.object({
     term: z.string(),
