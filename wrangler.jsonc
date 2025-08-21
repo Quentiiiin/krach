@@ -1,0 +1,10 @@
+{
+    "name": "krach",
+    "main": ".cloudflare/worker.js",
+    "compatibility_date": "2025-07-12",
+    "workers_dev": false,
+    "assets": {
+        "directory": "./.cloudflare",
+        "binding": "ASSETS"
+    }
+}

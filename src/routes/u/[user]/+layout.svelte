@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { da } from "zod/locales";
     import type { LayoutProps } from "./$types";
 
     let { data, children }: LayoutProps = $props();
